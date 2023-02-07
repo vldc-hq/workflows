@@ -3,15 +3,8 @@ name: 'Scan for security vulnerabilities'
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main,utama,master]
   pull_request:
-    paths:
-    - '**/go.mod'
-    - '**/requirements.txt'
-    - '**/setup.py'
-    - '**/*.lock'
-    - '**/*lock.json'
+    branch: [main,master,utama]
 
 jobs:
   gitleaks:
