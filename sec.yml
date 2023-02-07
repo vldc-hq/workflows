@@ -2,6 +2,7 @@
 name: 'Scan for security vulnerabilities'
 
 on:
+  workflow_dispatch:
   push:
     branches: [main,utama,master]
   pull_request:
