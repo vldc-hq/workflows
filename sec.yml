@@ -20,7 +20,7 @@ jobs:
       with:
         go-version: "1.20"
     - name: Scan for leaks
-      run: go install github.com/zricethezav/gitleaks/v8@v8.15.3 & /home/runner/go/bin/gitleaks detect -v --source .
+      run: go install github.com/zricethezav/gitleaks/v8@v8.15.3 && /home/runner/go/bin/gitleaks detect -v --source .
   semgrep:
     name: Semgrep scan
     runs-on: ubuntu-latest
