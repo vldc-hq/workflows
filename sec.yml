@@ -17,10 +17,14 @@ jobs:
       uses: actions/checkout@v3
       with:
         ref: ${{ github.event.pull_request.head.sha }}
+    - name: Setup go
+      uses: actions/setup-go@v3
+      with:
+        go-version: "1.20"
     - name: Scan for leaks
-      run: detect -v --source .
-
-
+      run:
+      - go install github.com/zricethezav/gitleaks/v8@v8.15.3
+      - gitleaks detect -v --source .
   semgrep:
     name: Semgrep scan
     runs-on: ubuntu-latest
