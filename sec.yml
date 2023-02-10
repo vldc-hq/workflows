@@ -7,6 +7,20 @@ on:
     branch: [main,master,utama]
 
 jobs:
+  gitleaks:
+    name: GitLeaks scan
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/zricethezav/gitleaks
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Scan for leaks
+      run: detect -v --source .
+
+
   semgrep:
     name: Semgrep scan
     runs-on: ubuntu-latest
