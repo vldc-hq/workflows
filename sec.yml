@@ -10,8 +10,6 @@ jobs:
   gitleaks:
     name: GitLeaks scan
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/zricethezav/gitleaks
     steps:
     - name: Check out code
       uses: actions/checkout@v3
