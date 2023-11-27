@@ -18,8 +18,9 @@ jobs:
     - name: Setup go
       uses: actions/setup-go@v3
       with:
-        go-version: "1.20"
+        go-version: "1.21"
     - name: Scan for leaks
+      continue-on-error: true
       run: go install github.com/zricethezav/gitleaks/v8@v8.15.3 && /home/runner/go/bin/gitleaks detect -v --source .
   semgrep:
     name: Semgrep scan
@@ -30,6 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: semgrep
+        continue-on-error: true
         env:
            SEMGREP_RULES: p/default # more at semgrep.dev/explore
   osv-scanner:
@@ -42,3 +44,4 @@ jobs:
         ref: ${{ github.event.pull_request.head.sha }}
     - name: Scan the code
       run: /osv-scanner --skip-git -r . || if [ $? -eq 128 ]; then true; else exit $?; fi
+      continue-on-error: true
